@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ShopZone — Shop the Future</title>
+  <link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/responsive.css" />
+<body>
+
+  <!-- ── NAVBAR ── -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-inner">
+
+      <a href="index.html" class="nav-logo">
+        Shop<span>Zone</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="pages/products.html">Products</a></li>
+        <li><a href="#">Categories</a></li>
+        <li><a href="#">Deals</a></li>
+      </ul>
+
+      <div class="nav-right">
+        <div class="search-bar">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+          <input type="text" placeholder="Search products..." id="searchInput" />
+        </div>
+
+        <button class="btn-icon" title="Account" onclick="window.location='pages/account.html'"></button>
+          <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+          </svg>
+        </button>
+
+        <button class="btn-icon cart-icon" title="Cart" onclick="window.location='pages/cart.html'">
+          <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+
+        <button class="hamburger" id="hamburger" title="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+    <div class="container hero-inner">
+
+      <div class="hero-content">
+        <p class="eyebrow">New Collection 2026</p>
+        <h1 class="display-title">
+          Shop the<br>Future of<br><span class="text-accent">Style.</span>
+        </h1>
+        <p class="hero-desc">
+          Discover premium products curated for modern living.
+          Fast delivery, easy returns, and unbeatable prices.
+        </p>
+        <div class="hero-btns">
+          <a href="pages/products.html" class="btn btn-primary btn-lg">Shop Now</a>
+          <a href="pages/deals.html" class="btn btn-outline btn-lg">View Deals</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat">
+            <span class="stat-num">50K+</span>
+            <span class="stat-label">Products</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-num">2M+</span>
+            <span class="stat-label">Customers</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-num">4.9★</span>
+            <span class="stat-label">Rating</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-card-stack">
+          <div class="hero-product-card">
+            <div class="hero-card-img">👟</div>
+            <div class="hero-card-info">
+              <p class="hero-card-name">Air Max Pro</p>
+              <p class="hero-card-price">₹4,299</p>
+            </div>
+          </div>
+          <div class="hero-product-card offset">
+            <div class="hero-card-img">🎧</div>
+            <div class="hero-card-info">
+              <p class="hero-card-name">Pro Headphones</p>
+              <p class="hero-card-price">₹8,999</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── PRODUCTS SECTION ── -->
+  <section class="products-section section">
+    <div class="container">
+
+      <div class="products-header">
+        <div>
+          <p class="eyebrow">Our Collection</p>
+          <h2 class="section-title">Featured Products</h2>
+        </div>
+        <span class="products-count">Showing <strong>8</strong> of 50K+ products</span>
+      </div>
+
+      <!-- Filter Bar -->
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="electronics">Electronics</button>
+        <button class="filter-btn" data-filter="fashion">Fashion</button>
+        <button class="filter-btn" data-filter="footwear">Footwear</button>
+        <button class="filter-btn" data-filter="accessories">Accessories</button>
+      </div>
+
+      <!-- Product Grid -->
+      <div class="product-grid" id="productGrid">
+
+        <!-- Card 1 -->
+        <div class="product-card" data-category="electronics" onclick="window.location='pages/product-detail.html'">
+          <div class="card-img-wrap">
+            <span class="card-emoji">🎧</span>
+            <span class="card-badge badge-accent">New</span>
+            <button class="card-wishlist" title="Wishlist">♡</button>
+          </div>
+          <div class="card-body">
+            <p class="card-category">Electronics</p>
+            <h3 class="card-name">Pro Headphones X1</h3>
+            <div class="card-rating">
+              <span class="stars">★★★★★</span>
+              <span class="rating-count">(284)</span>
+            </div>
+            <div class="card-footer">
+              <div>
+                <span class="card-price">₹8,999</span>
+                <span class="card-price-old">₹12,999</span>
+              </div>
+              <button class="add-to-cart" data-name="Pro Headphones X1" data-price="8999">+</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="product-card" data-category="footwear" onclick="window.location='pages/product-detail.html'">
+          <div class="card-img-wrap">
+            <span class="card-emoji">👟</span>
+            <span class="card-badge badge-danger">Sale</span>
+            <button class="card-wishlist" title="Wishlist">♡</button>
+          </div>
+          <div class="card-body">
+            <p class="card-category">Footwear</p>
+            <h3 class="card-name">Air Max Pro 2026</h3>
+            <div class="card-rating">
+              <span class="stars">★★★★☆</span>
+              <span class="rating-count">(156)</span>
+            </div>
+            <div class="card-footer">
+              <div>
+                <span class="card-price">₹4,299</span>
+                <span class="card-price-old">₹6,499</span>
+              </div>
+              <button class="add-to-cart" data-name="Air Max Pro 2026" data-price="4299">+</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="product-card" data-category="accessories" onclick="window.location='pages/product-detail.html'">
+          <div class="card-img-wrap">
+            <span class="card-emoji">⌚</span>
+            <button class="card-wishlist" title="Wishlist">♡</button>
+          </div>
+          <div class="card-body">
+            <p class="card-category">Accessories</p>
+            <h3 class="card-name">Smart Watch Ultra</h3>
+            <div class="card-rating">
+              <span class="stars">★★★★★</span>
+              <span class="rating-count">(421)</span>
+            </div>
+            <div class="card-footer">
+              <div>
+                <span class="card-price">₹15,999</span>
+                <span class="card-price-old">₹19,999</span>
+              </div>
+              <button class="add-to-cart" data-name="Smart Watch Ultra" data-price="15999">+</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="product-card" data-category="fashion" onclick="window.location='pages/product-detail.html'">
+          <div class="card-img-wrap">
+            <span class="card-emoji">👕</span>
+            <span class="card-badge badge-accent">New</span>
+            <button class="card-wishlist" title="Wishlist">♡</button>
+          </div>
+          <div class="card-body">
+            <p class="card-category">Fashion</p>
+            <h3 class="card-name">Premium Cotton Tee</h3>
+            <div class="card-rating">
+              <span class="stars">★★★★☆</span>
+              <span class="rating-count">(98)</span>
+            </div>
+            <div class="card-footer">
+              <div>
+                <span class="card-price">₹1,299</span>
+                <span class="card-price-old">₹1,999</span>
+              </div>
+              <button class="add-to-cart" data-name="Premium Cotton Tee" data-price="1299">+</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="product-card" data-category="electronics" onclick="window.location='pages/product-detail.html'">
+          <div class="card-img-wrap">
+            <span class="card-emoji">📱</span>
+            <button class="card-wishlist" title="Wishlist">♡</button>
+          </div>
+          <div class="card-body">
+            <p class="card-category">Electronics</p>
+            <h3 class="card-name">Ultra Smartphone 15</h3>
+            <div class="card-rating">
+              <span class="stars">★★★★★</span>
+              <span class="rating-count">(732)</span>
+            </div>
+            <div class="card-footer">
+              <div>
+                <span class="card-price">₹62,999</span>
+                <span class="card-price-old">₹74,999</span>
+              </div>
+              <button class="add-to-cart" data-name="Ultra Smartphone 15" data-price="62999">+</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="product-card" data-category="fashion" onclick="window.location='pages/product-detail.html'">
+          <div class="card-img-wrap">
+            <span class="card-emoji">👜</span>
+            <span class="card-badge badge-danger">Sale</span>
+            <button class="card-wishlist" title="Wishlist">♡</button>
+          </div>
+          <div class="card-body">
+            <p class="card-category">Fashion</p>
+            <h3 class="card-name">Leather Tote Bag</h3>
+            <div class="card-rating">
+              <span class="stars">★★★★☆</span>
+              <span class="rating-count">(67)</span>
+            </div>
+            <div class="card-footer">
+              <div>
+                <span class="card-price">₹3,499</span>
+                <span class="card-price-old">₹5,999</span>
+              </div>
+              <button class="add-to-cart" data-name="Leather Tote Bag" data-price="3499">+</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 7 -->
+        <div class="product-card" data-category="footwear" onclick="window.location='pages/product-detail.html'">
+          <div class="card-img-wrap">
+            <span class="card-emoji">👠</span>
+            <button class="card-wishlist" title="Wishlist">♡</button>
+          </div>
+          <div class="card-body">
+            <p class="card-category">Footwear</p>
+            <h3 class="card-name">Heels Classic Edition</h3>
+            <div class="card-rating">
+              <span class="stars">★★★★★</span>
+              <span class="rating-count">(203)</span>
+            </div>
+            <div class="card-footer">
+              <div>
+                <span class="card-price">₹2,799</span>
+                <span class="card-price-old">₹3,999</span>
+              </div>
+              <button class="add-to-cart" data-name="Heels Classic Edition" data-price="2799">+</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 8 -->
+        <div class="product-card" data-category="accessories" onclick="window.location='pages/product-detail.html'">
+          <div class="card-img-wrap">
+            <span class="card-emoji">🕶️</span>
+            <span class="card-badge badge-accent">New</span>
+            <button class="card-wishlist" title="Wishlist">♡</button>
+          </div>
+          <div class="card-body">
+            <p class="card-category">Accessories</p>
+            <h3 class="card-name">Polarized Sunglasses</h3>
+            <div class="card-rating">
+              <span class="stars">★★★★☆</span>
+              <span class="rating-count">(145)</span>
+            </div>
+            <div class="card-footer">
+              <div>
+                <span class="card-price">₹1,899</span>
+                <span class="card-price-old">₹2,999</span>
+              </div>
+              <button class="add-to-cart" data-name="Polarized Sunglasses" data-price="1899">+</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">Shop<span>Zone</span></a>
+        <p>Premium products curated for modern living. Fast delivery, easy returns, unbeatable prices.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="#">New Arrivals</a></li>
+          <li><a href="#">Electronics</a></li>
+          <li><a href="#">Fashion</a></li>
+          <li><a href="#">Accessories</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Help</h4>
+        <ul>
+          <li><a href="#">Track Order</a></li>
+          <li><a href="#">Returns</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 <span>ShopZone</span>. All rights reserved.</p>
+      <p>Made with ❤️ by Aditya Singh</p>
+    </div>
+  </div>
+</footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

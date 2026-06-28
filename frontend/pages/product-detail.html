@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pro Headphones X1 — ShopZone</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <link rel="stylesheet" href="../css/responsive.css"/>
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="../index.html" class="nav-logo">Shop<span>Zone</span></a>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="products.html" class="active">Products</a></li>
+        <li><a href="#">Categories</a></li>
+        <li><a href="#">Deals</a></li>
+      </ul>
+      <div class="nav-right">
+        <div class="search-bar">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+          <input type="text" placeholder="Search products..."/>
+        </div>
+        <button class="btn-icon" title="Account">
+          <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+          </svg>
+        </button>
+        <button class="btn-icon cart-icon" title="Cart" onclick="window.location='cart.html'">
+          <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="breadcrumb-bar">
+    <div class="container">
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <span>/</span>
+        <a href="products.html">Products</a>
+        <span>/</span>
+        <span class="active">Pro Headphones X1</span>
+      </nav>
+    </div>
+  </div>
+
+  <section class="pd-section section">
+    <div class="container">
+      <div class="pd-grid">
+
+        <div class="pd-gallery">
+          <div class="pd-main-img" id="mainImg">
+            <span class="pd-main-emoji">🎧</span>
+          </div>
+          <div class="pd-thumbs">
+            <div class="pd-thumb active" data-emoji="🎧">🎧</div>
+            <div class="pd-thumb" data-emoji="📦">📦</div>
+            <div class="pd-thumb" data-emoji="🔌">🔌</div>
+            <div class="pd-thumb" data-emoji="📋">📋</div>
+          </div>
+        </div>
+
+        <div class="pd-info">
+          <p class="eyebrow">Electronics</p>
+          <h1 class="pd-title">Pro Headphones X1</h1>
+          <div class="pd-rating">
+            <span class="stars">★★★★★</span>
+            <span class="pd-rating-text">4.9 · 284 reviews</span>
+          </div>
+          <div class="pd-price-wrap">
+            <span class="pd-price">₹8,999</span>
+            <span class="pd-price-old">₹12,999</span>
+            <span class="badge badge-success">31% OFF</span>
+          </div>
+          <p class="pd-desc">
+            Premium noise-cancelling headphones with 40hr battery life,
+            Hi-Res audio certification, and ultra-comfortable memory foam
+            ear cushions designed for all-day wear.
+          </p>
+
+          <div class="pd-option-group">
+            <p class="pd-option-label">Color: <span id="colorName">Space Black</span></p>
+            <div class="pd-colors">
+              <button class="color-dot active" data-color="Space Black" style="background:#222;border:2px solid #6C63FF;" title="Space Black"></button>
+              <button class="color-dot" data-color="Bronze Gold" style="background:#C0A080;" title="Bronze Gold"></button>
+              <button class="color-dot" data-color="Pearl White" style="background:#E8E8E8;" title="Pearl White"></button>
+            </div>
+          </div>
+
+          <div class="pd-option-group">
+            <p class="pd-option-label">Quantity</p>
+            <div class="pd-qty">
+              <button class="qty-btn" id="qtyMinus">−</button>
+              <span class="qty-val" id="qtyVal">1</span>
+              <button class="qty-btn" id="qtyPlus">+</button>
+            </div>
+          </div>
+
+          <div class="pd-actions">
+            <button class="btn btn-primary btn-lg pd-cart-btn" id="addToCartBtn"
+              data-name="Pro Headphones X1" data-price="8999">
+              Add to Cart
+            </button>
+            <button class="pd-wish-btn" id="wishBtn" title="Wishlist">♡</button>
+          </div>
+
+          <div class="pd-features">
+            <div class="pd-feature">
+              <span class="pd-feature-icon">🚚</span>
+              <div>
+                <p class="pd-feature-title">Free Delivery</p>
+                <p class="pd-feature-sub">Orders above ₹499</p>
+              </div>
+            </div>
+            <div class="pd-feature">
+              <span class="pd-feature-icon">↩️</span>
+              <div>
+                <p class="pd-feature-title">Easy Returns</p>
+                <p class="pd-feature-sub">7-day return policy</p>
+              </div>
+            </div>
+            <div class="pd-feature">
+              <span class="pd-feature-icon">🛡️</span>
+              <div>
+                <p class="pd-feature-title">1 Year Warranty</p>
+                <p class="pd-feature-sub">Manufacturer warranty</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="../js/main.js"></script>
+  <script>
+    // Thumbnail switcher
+    document.querySelectorAll('.pd-thumb').forEach(thumb => {
+      thumb.addEventListener('click', () => {
+        document.querySelectorAll('.pd-thumb').forEach(t => t.classList.remove('active'));
+        thumb.classList.add('active');
+        document.querySelector('.pd-main-emoji').textContent = thumb.dataset.emoji;
+      });
+    });
+
+    // Color selector
+    document.querySelectorAll('.color-dot').forEach(dot => {
+      dot.addEventListener('click', () => {
+        document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('active'));
+        dot.classList.add('active');
+        document.getElementById('colorName').textContent = dot.dataset.color;
+      });
+    });
+
+    // Quantity
+    let qty = 1;
+    document.getElementById('qtyPlus').addEventListener('click', () => {
+      qty = Math.min(qty + 1, 10);
+      document.getElementById('qtyVal').textContent = qty;
+    });
+    document.getElementById('qtyMinus').addEventListener('click', () => {
+      qty = Math.max(qty - 1, 1);
+      document.getElementById('qtyVal').textContent = qty;
+    });
+
+    // Add to cart — uses same key as main.js
+    document.getElementById('addToCartBtn').addEventListener('click', function() {
+      const cart = JSON.parse(localStorage.getItem('shopzone_cart') || '[]');
+      for (let i = 0; i < qty; i++) {
+        cart.push({ name: this.dataset.name, price: this.dataset.price, id: Date.now() + i });
+      }
+      localStorage.setItem('shopzone_cart', JSON.stringify(cart));
+      // Update cart badge
+      const countEl = document.getElementById('cartCount');
+      if (countEl) {
+        countEl.textContent = cart.length;
+        countEl.classList.add('visible');
+      }
+      this.textContent = '✓ Added!';
+      this.style.background = '#2ECC71';
+      setTimeout(() => {
+        this.textContent = 'Add to Cart';
+        this.style.background = '';
+      }, 2000);
+      showToast(`✓ Added ${qty} item${qty > 1 ? 's' : ''} to cart!`, 'success');
+    });
+
+   
+    const wishBtn = document.getElementById('wishBtn');
+    wishBtn.addEventListener('click', () => {
+      wishBtn.classList.toggle('active');
+      wishBtn.textContent = wishBtn.classList.contains('active') ? '♥' : '♡';
+    });
+  </script>
+</body>
+</html>

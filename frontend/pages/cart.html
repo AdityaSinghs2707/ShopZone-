@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Cart — ShopZone</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <link rel="stylesheet" href="../css/responsive.css"/>
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="../index.html" class="nav-logo">Shop<span>Zone</span></a>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="#">Categories</a></li>
+        <li><a href="#">Deals</a></li>
+      </ul>
+
+      <div class="nav-right">
+        <div class="search-bar">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+          <input type="text" placeholder="Search products..."/>
+        </div>
+        <button class="btn-icon" title="Account">
+          <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+          </svg>
+        </button>
+        <button class="btn-icon cart-icon active" title="Cart">
+          <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="breadcrumb-bar">
+    <div class="container">
+      <nav class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <span>/</span>
+        <span class="active">Cart</span>
+      </nav>
+    </div>
+  </div>
+
+  <section class="cart-section section">
+    <div class="container">
+      <div class="cart-page-header">
+        <h1 class="section-title">Your Cart</h1>
+        <span class="cart-item-count" id="cartItemCount">0 items</span>
+      </div>
+
+      <div class="cart-empty" id="cartEmpty" style="display:none">
+        <div class="empty-icon">🛒</div>
+        <h2 class="empty-title">Your cart is empty</h2>
+        <p class="empty-desc">Looks like you haven't added anything yet.</p>
+        <a href="../index.html" class="btn btn-primary">Start Shopping</a>
+      </div>
+
+      <div class="cart-layout" id="cartLayout" style="display:none">
+        <div class="cart-items" id="cartItems"></div>
+        <div class="order-summary">
+          <h2 class="summary-title">Order Summary</h2>
+          <div class="summary-rows">
+            <div class="summary-row">
+              <span>Subtotal</span>
+              <span id="subtotalVal">₹0</span>
+            </div>
+            <div class="summary-row">
+              <span>Delivery</span>
+              <span class="text-success" id="deliveryVal">FREE</span>
+            </div>
+            <div class="summary-row">
+              <span>Discount</span>
+              <span class="text-danger" id="discountVal">−₹0</span>
+            </div>
+          </div>
+          <div class="summary-divider"></div>
+          <div class="summary-total">
+            <span>Total</span>
+            <span id="totalVal">₹0</span>
+          </div>
+          <div class="promo-row">
+            <input type="text" class="promo-input" placeholder="Promo code (try SHOP10)" id="promoInput"/>
+            <button class="promo-btn" id="promoBtn">Apply</button>
+          </div>
+          <button class="checkout-btn" id="checkoutBtn">Proceed to Checkout →</button>
+          <div class="safe-badge">🔒 Secure checkout · SSL encrypted</div>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 class="modal-title">Checkout</h2>
+        <button class="modal-close" id="modalClose">✕</button>
+      </div>
+         
+      <div class="modal-body">
+        <div class="form-section">
+          <p class="form-section-title">Delivery Details</p>
+          <div class="form-grid">
+            <div class="input-group">
+              <label class="input-label">Full Name</label>
+              <input type="text" class="input" placeholder="Aditya Singh"/>
+            </div>
+            <div class="input-group">
+              <label class="input-label">Phone</label>
+              <input type="text" class="input" placeholder="+91 98765 43210"/>
+            </div>
+            <div class="input-group full-width">
+              <label class="input-label">Address</label>
+              <input type="text" class="input" placeholder="House no, Street, Area"/>
+            </div>
+            <div class="input-group">
+              <label class="input-label">City</label>
+              <input type="text" class="input" placeholder="Haldwani"/>
+            </div>
+            <div class="input-group">
+              <label class="input-label">Pincode</label>
+              <input type="text" class="input" placeholder="263139"/>
+            </div>
+          </div>
+        </div>
+        <div class="form-section">
+          <p class="form-section-title">Payment Method</p>
+          <div class="payment-options">
+            <label class="payment-option">
+              <input type="radio" name="payment" checked/> UPI / GPay
+            </label>
+            <label class="payment-option">
+              <input type="radio" name="payment"/> Credit / Debit Card
+            </label>
+            <label class="payment-option">
+              <input type="radio" name="payment"/> Cash on Delivery
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="modal-total">Total: <span id="modalTotal">₹0</span></div>
+        <button class="btn btn-primary btn-lg" id="placeOrderBtn">Place Order 🎉</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/main.js"></script>
+  <script>
+    const CART_KEY = 'shopzone_cart';
+    let cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+    let discount = 0;
+
+    const emojis = {
+      'Pro Headphones X1': '🎧', 'Air Max Pro 2026': '👟',
+      'Smart Watch Ultra': '⌚', 'Premium Cotton Tee': '👕',
+      'Ultra Smartphone 15': '📱', 'Leather Tote Bag': '👜',
+      'Heels Classic Edition': '👠', 'Polarized Sunglasses': '🕶️'
+    };
+
+    function groupCart(cart) {
+      const map = {};
+      cart.forEach(item => {
+        if (map[item.name]) map[item.name].qty++;
+        else map[item.name] = { ...item, qty: 1 };
+      });
+      return Object.values(map);
+    }
+
+    function renderCart() {
+      cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+      const grouped = groupCart(cart);
+      const cartEmpty  = document.getElementById('cartEmpty');
+      const cartLayout = document.getElementById('cartLayout');
+      const cartItems  = document.getElementById('cartItems');
+      const countEl    = document.getElementById('cartItemCount');
+
+      countEl.textContent = `${cart.length} item${cart.length !== 1 ? 's' : ''}`;
+
+      // Update nav badge
+      const badge = document.getElementById('cartCount');
+      if (badge) { badge.textContent = cart.length; badge.classList.toggle('visible', cart.length > 0); }
+
+      if (grouped.length === 0) {
+        cartEmpty.style.display  = 'flex';
+        cartLayout.style.display = 'none';
+        return;
+      }
+
+      cartEmpty.style.display  = 'none';
+      cartLayout.style.display = 'grid';
+
+      cartItems.innerHTML = grouped.map(item => `
+        <div class="cart-item">
+          <div class="item-img">${emojis[item.name] || '📦'}</div>
+          <div class="item-info">
+            <p class="item-name">${item.name}</p>
+            <p class="item-price">₹${Number(item.price).toLocaleString('en-IN')}</p>
+            <div class="item-qty-row">
+              <button class="qty-btn" onclick="changeQty('${item.name}', -1)">−</button>
+              <span class="qty-num">${item.qty}</span>
+              <button class="qty-btn" onclick="changeQty('${item.name}', 1)">+</button>
+            </div>
+          </div>
+          <div class="item-right">
+            <p class="item-total">₹${(Number(item.price) * item.qty).toLocaleString('en-IN')}</p>
+            <button class="item-remove" onclick="removeItem('${item.name}')">✕</button>
+          </div>
+        </div>
+      `).join('');
+
+      updateSummary(grouped);
+    }
+
+    function updateSummary(grouped) {
+      const subtotal = grouped.reduce((s, i) => s + Number(i.price) * i.qty, 0);
+      const delivery = subtotal > 499 ? 0 : 99;
+      const total    = subtotal + delivery - discount;
+      document.getElementById('subtotalVal').textContent = '₹' + subtotal.toLocaleString('en-IN');
+      document.getElementById('deliveryVal').textContent = delivery === 0 ? 'FREE' : '₹' + delivery;
+      document.getElementById('discountVal').textContent = discount > 0 ? '−₹' + discount : '−₹0';
+      document.getElementById('totalVal').textContent    = '₹' + total.toLocaleString('en-IN');
+      document.getElementById('modalTotal').textContent  = '₹' + total.toLocaleString('en-IN');
+    }
+
+    function changeQty(name, delta) {
+      if (delta > 0) {
+        const item = cart.find(i => i.name === name);
+        if (item) cart.push({ name: item.name, price: item.price, id: Date.now() });
+      } else
+       {
+        const idx = cart.map(i => i.name).lastIndexOf(name);
+        if (idx > -1) cart.splice(idx, 1);
+      }
+
+      localStorage.setItem(CART_KEY, JSON.stringify(cart));
+      renderCart();
+    }
+
+    function removeItem(name) 
+    {
+      cart = cart.filter(i => i.name !== name);
+      localStorage.setItem(CART_KEY, JSON.stringify(cart));
+      renderCart();
+    }
+
+    function showToastCart(msg, type = 'default') 
+    {
+      let t = document.getElementById('toast');
+      if (!t) {
+        t = document.createElement('div'); t.id = 'toast';
+        t.style.cssText = 'position:fixed;bottom:28px;right:28px;z-index:9999;color:#fff;padding:13px 22px;border-radius:12px;font-size:13px;font-weight:500;font-family:Inter,sans-serif;opacity:0;transition:opacity 0.3s;pointer-events:none;';
+        document.body.appendChild(t);
+      }
+
+      const colors = { default:'#6C63FF', success:'#2ECC71', error:'#FF6B6B', warning:'#F9A825' };
+      t.style.background = colors[type] || colors.default;
+      t.textContent = msg;
+      t.style.opacity = '1';
+      clearTimeout(t._t);
+      t._t = setTimeout(() => t.style.opacity = '0', 2500);
+    }
+
+    
+    document.getElementById('promoBtn').addEventListener('click', () => {
+      const code = document.getElementById('promoInput').value.trim().toUpperCase();
+      if (code === 'SHOP10') {
+        discount = 500;
+        showToastCart('🎉 Promo applied! ₹500 off', 'success');
+      } else {
+        showToastCart('❌ Invalid promo code', 'error');
+      }
+      renderCart();
+    });
+
+    // Checkout modal
+    document.getElementById('checkoutBtn').addEventListener('click', () => {
+      document.getElementById('modalOverlay').classList.add('active');
+    });
+    document.getElementById('modalClose').addEventListener('click', () => {
+      document.getElementById('modalOverlay').classList.remove('active');
+    });
+    document.getElementById('modalOverlay').addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) e.currentTarget.classList.remove('active');
+    });
+
+    // Place order
+    document.getElementById('placeOrderBtn').addEventListener('click', () => {
+      cart = [];
+      localStorage.setItem(CART_KEY, JSON.stringify(cart));
+      document.getElementById('modalOverlay').classList.remove('active');
+      showToastCart('🎉 Order placed successfully!', 'success');
+      setTimeout(() => renderCart(), 600);
+    });
+
+    renderCart();
+  </script>
+</body>
+</html>

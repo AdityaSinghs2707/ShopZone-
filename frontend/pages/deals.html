@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Deals — ShopZone</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <link rel="stylesheet" href="../css/responsive.css"/>
+  <style>
+    .deals-hero {
+      background: linear-gradient(135deg, rgba(255,96,0,0.12) 0%, rgba(40,116,240,0.08) 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 48px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .deals-hero::before {
+      content: '';
+      position: absolute;
+      top: -100px; left: 50%;
+      transform: translateX(-50%);
+      width: 600px; height: 300px;
+      background: radial-gradient(circle, rgba(255,96,0,0.1) 0%, transparent 70%);
+    }
+    .deals-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--orange-soft);
+      border: 1px solid var(--orange);
+      color: var(--orange);
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .deals-hero h1 {
+      font-family: var(--font-display);
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+    .deals-hero h1 span { color: var(--orange); }
+    .deals-hero p { color: var(--text-muted); font-size: 16px; max-width: 500px; margin: 0 auto 28px; }
+
+    /* Countdown */
+    .countdown-wrap {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 16px 28px;
+      margin-bottom: 8px;
+    }
+    .countdown-label { font-size: 12px; color: var(--text-muted); margin-right: 8px; font-weight: 600; }
+    .countdown-block { text-align: center; min-width: 52px; }
+    .countdown-num {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--orange);
+      line-height: 1;
+      background: var(--orange-soft);
+      border-radius: var(--radius-md);
+      padding: 8px 12px;
+      min-width: 52px;
+    }
+    .countdown-unit { font-size: 10px; color: var(--text-muted); text-transform: uppercase; margin-top: 4px; display: block; letter-spacing: 0.06em; }
+    .countdown-sep { font-size: 24px; font-weight: 700; color: var(--orange); margin-top: -12px; }
+
+    /* Stats bar */
+    .deals-stats {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .deal-stat { text-align: center; }
+    .deal-stat-num { font-family: var(--font-display); font-size: 24px; font-weight: 800; color: var(--orange); display: block; }
+    .deal-stat-label { font-size: 12px; color: var(--text-muted); }
+
+    /* Filter tabs */
+    .deals-filters {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 32px 0 24px;
+      flex-wrap: wrap;
+    }
+    .deals-filter-btn {
+      padding: 9px 20px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1.5px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text-muted);
+      transition: all 0.2s;
+      font-family: var(--font-body);
+    }
+    .deals-filter-btn:hover { border-color: var(--orange); color: var(--orange); }
+    .deals-filter-btn.active { background: var(--orange); color: #fff; border-color: var(--orange); font-weight: 600; box-shadow: 0 4px 16px rgba(255,96,0,0.35); }
+
+    .deals-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+
+    /* Deal card - special styling */
+    .deal-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      transition: all 0.25s;
+      cursor: pointer;
+      position: relative;
+    }
+    .deal-card:hover {
+      border-color: var(--orange);
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(255,96,0,0.2);
+    }
+    .deal-img-wrap {
+      position: relative;
+      background: linear-gradient(135deg, var(--bg-hover), rgba(255,96,0,0.05));
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .deal-emoji { font-size: 64px; transition: transform 0.25s; filter: drop-shadow(0 8px 16px rgba(0,0,0,0.4)); }
+    .deal-card:hover .deal-emoji { transform: scale(1.12) translateY(-4px); }
+
+    .discount-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: linear-gradient(135deg, var(--orange), var(--orange-hover));
+      color: #fff;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 5px 12px;
+      border-radius: 999px;
+      box-shadow: 0 4px 12px rgba(255,96,0,0.4);
+    }
+    .deal-wishlist {
+      position: absolute;
+      top: 10px; right: 10px;
+      width: 32px; height: 32px;
+      background: rgba(15,17,23,0.75);
+      border: 1px solid var(--border-hover);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; color: var(--text-muted);
+      cursor: pointer; opacity: 0;
+      transition: all 0.2s;
+      backdrop-filter: blur(6px);
+    }
+    .deal-card:hover .deal-wishlist { opacity: 1; }
+
+    .deal-body { padding: 16px; }
+    .deal-cat { font-size: 10px; font-weight: 600; color: var(--orange); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+    .deal-name { font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: 10px; line-height: 1.4; }
+    .deal-rating { display: flex; align-items: center; gap: 5px; margin-bottom: 12px; }
+    .deal-footer { display: flex; align-items: center; justify-content: space-between; }
+    .deal-prices { display: flex; flex-direction: column; }
+    .deal-price { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--orange); }
+    .deal-price-old { font-size: 11px; color: var(--text-dim); text-decoration: line-through; }
+    .deal-savings { font-size: 11px; color: var(--success); font-weight: 600; margin-top: 2px; }
+
+    .deal-add-btn {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, var(--orange), var(--orange-hover));
+      border-radius: var(--radius-lg);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 20px; font-weight: 300;
+      cursor: pointer; border: none;
+      transition: all 0.2s;
+      box-shadow: 0 4px 12px rgba(255,96,0,0.4);
+    }
+    .deal-add-btn:hover { transform: scale(1.1); box-shadow: 0 6px 20px rgba(255,96,0,0.5); }
+
+    /* Empty */
+    .empty-deals { text-align: center; padding: 80px 20px; color: var(--text-muted); grid-column: 1/-1; }
+    .empty-deals .icon { font-size: 56px; margin-bottom: 16px; }
+
+    /* Skeleton */
+    .skel { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-xl); overflow: hidden; }
+    .skel-img { height: 180px; background: linear-gradient(90deg, var(--bg-hover) 25%, var(--bg-card) 50%, var(--bg-hover) 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
+    .skel-body { padding: 16px; }
+    .skel-line { height: 12px; background: linear-gradient(90deg, var(--bg-hover) 25%, var(--bg-card) 50%, var(--bg-hover) 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 6px; margin-bottom: 10px; }
+    .skel-line.short { width: 55%; }
+    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+    @media (max-width: 1024px) { .deals-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 768px) { .deals-grid { grid-template-columns: repeat(2, 1fr); } .deals-hero h1 { font-size: 32px; } .countdown-num { font-size: 22px; } }
+    @media (max-width: 480px) { .deals-grid { grid-template-columns: 1fr 1fr; gap: 12px; } }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="../index.html" class="nav-logo">Shop<span>Zone</span></a>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="#">Categories</a></li>
+        <li><a href="deals.html" class="active">Deals</a></li>
+      </ul>
+      <div class="nav-right">
+        <div class="search-bar">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+          <input type="text" placeholder="Search deals..." id="searchInput"/>
+        </div>
+        <button class="btn-icon" title="Account">
+          <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+          </svg>
+        </button>
+        <button class="btn-icon cart-icon" title="Cart" onclick="window.location='cart.html'">
+          <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Deals Hero -->
+  <div class="deals-hero">
+    <div class="container">
+      <div class="deals-hero-badge">🔥 Limited Time Offers</div>
+      <h1>Today's Best <span>Deals</span></h1>
+      <p>Grab the hottest discounts before they're gone. Up to 40% off on premium products!</p>
+      <div class="countdown-wrap">
+        <span class="countdown-label">⏳ Ends in:</span>
+        <div class="countdown-block">
+          <span class="countdown-num" id="cdHours">00</span>
+          <span class="countdown-unit">Hours</span>
+        </div>
+        <span class="countdown-sep">:</span>
+        <div class="countdown-block">
+          <span class="countdown-num" id="cdMins">00</span>
+          <span class="countdown-unit">Minutes</span>
+        </div>
+        <span class="countdown-sep">:</span>
+        <div class="countdown-block">
+          <span class="countdown-num" id="cdSecs">00</span>
+          <span class="countdown-unit">Seconds</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="container">
+    <div class="deals-stats">
+      <div class="deal-stat">
+        <span class="deal-stat-num" id="totalDeals">0</span>
+        <span class="deal-stat-label">Active Deals</span>
+      </div>
+      <div class="deal-stat">
+        <span class="deal-stat-num" id="maxDiscount">0%</span>
+        <span class="deal-stat-label">Max Discount</span>
+      </div>
+      <div class="deal-stat">
+        <span class="deal-stat-num" id="totalSavings">₹0</span>
+        <span class="deal-stat-label">You Can Save</span>
+      </div>
+      <div class="deal-stat">
+        <span class="deal-stat-num">Free</span>
+        <span class="deal-stat-label">Delivery on ₹499+</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <section class="section">
+    <div class="container">
+      <div class="deals-filters">
+        <button class="deals-filter-btn active" data-filter="all">🔥 All Deals</button>
+        <button class="deals-filter-btn" data-filter="electronics">📱 Electronics</button>
+        <button class="deals-filter-btn" data-filter="fashion">👕 Fashion</button>
+        <button class="deals-filter-btn" data-filter="footwear">👟 Footwear</button>
+        <button class="deals-filter-btn" data-filter="accessories">⌚ Accessories</button>
+      </div>
+
+      <div class="deals-grid" id="dealsGrid"></div>
+    </div>
+  </section>
+
+  <script src="../js/main.js"></script>
+  <script>
+    var DEALS_API_URL = 'http://127.0.0.1:8000/api';
+    var allDeals = [];
+    var currentFilter = 'all';
+
+    // Countdown — ends at midnight
+    function updateCountdown() {
+      var now = new Date();
+      var midnight = new Date();
+      midnight.setHours(23, 59, 59, 0);
+      var diff = midnight - now;
+      if (diff < 0) diff = 0;
+      var h = Math.floor(diff / 3600000);
+      var m = Math.floor((diff % 3600000) / 60000);
+      var s = Math.floor((diff % 60000) / 1000);
+      document.getElementById('cdHours').textContent = String(h).padStart(2,'0');
+      document.getElementById('cdMins').textContent  = String(m).padStart(2,'0');
+      document.getElementById('cdSecs').textContent  = String(s).padStart(2,'0');
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    function showSkeletons() {
+      var html = '';
+      for (var i = 0; i < 8; i++) {
+        html += '<div class="skel"><div class="skel-img"></div><div class="skel-body"><div class="skel-line short"></div><div class="skel-line"></div><div class="skel-line short"></div></div></div>';
+      }
+      document.getElementById('dealsGrid').innerHTML = html;
+    }
+
+    async function fetchDeals() {
+      showSkeletons();
+      try {
+        var res = await fetch(DEALS_API_URL + '/products?limit=100');
+        var data = await res.json();
+        // Only products with discount
+        allDeals = (data.products || []).filter(function(p) {
+          return p.originalPrice && p.originalPrice > p.price;
+        });
+        updateStats();
+        renderDeals();
+      } catch(err) {
+        document.getElementById('dealsGrid').innerHTML = '<div class="empty-deals"><div class="icon">⚠️</div><h3>Backend se connect nahi ho paya</h3><p>node server.js chala ke refresh karo</p></div>';
+      }
+    }
+
+    function updateStats() {
+      document.getElementById('totalDeals').textContent = allDeals.length;
+      var maxDisc = 0;
+      var totalSave = 0;
+      allDeals.forEach(function(p) {
+        var disc = Math.round((1 - p.price/p.originalPrice)*100);
+        if (disc > maxDisc) maxDisc = disc;
+        totalSave += (p.originalPrice - p.price);
+      });
+      document.getElementById('maxDiscount').textContent = maxDisc + '%';
+      document.getElementById('totalSavings').textContent = '₹' + totalSave.toLocaleString('en-IN');
+    }
+
+    function starsHTML(rating) {
+      var r = Math.round(rating); var s = '';
+      for (var i = 1; i <= 5; i++) s += i <= r ? '★' : '☆';
+      return s;
+    }
+
+    function renderDeals() {
+      var filtered = allDeals.slice();
+      if (currentFilter !== 'all') {
+        filtered = filtered.filter(function(p){ return p.category === currentFilter; });
+      }
+      var q = document.getElementById('searchInput').value.toLowerCase().trim();
+      if (q) filtered = filtered.filter(function(p){ return p.name.toLowerCase().includes(q); });
+
+      var grid = document.getElementById('dealsGrid');
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '<div class="empty-deals"><div class="icon">🔍</div><h3>Is category mein koi deal nahi</h3><p>Doosri category try karo</p></div>';
+        return;
+      }
+
+      var html = '';
+      for (var i = 0; i < filtered.length; i++) {
+        var p = filtered[i];
+        var disc = Math.round((1 - p.price/p.originalPrice)*100);
+        var savings = p.originalPrice - p.price;
+        html += '<div class="deal-card" onclick="window.location=\'product-detail.html\'">';
+        html += '<div class="deal-img-wrap">';
+        html += '<span class="deal-emoji">' + (p.emoji||'📦') + '</span>';
+        html += '<span class="discount-badge">-' + disc + '%</span>';
+        html += '<button class="deal-wishlist">♡</button>';
+        html += '</div>';
+        html += '<div class="deal-body">';
+        html += '<p class="deal-cat">' + p.category.toUpperCase() + '</p>';
+        html += '<h3 class="deal-name">' + p.name + '</h3>';
+        html += '<div class="deal-rating"><span class="stars">' + starsHTML(p.ratings) + '</span><span class="rating-count" style="font-size:11px;color:var(--text-muted)">(' + p.numReviews + ')</span></div>';
+        html += '<div class="deal-footer">';
+        html += '<div class="deal-prices">';
+        html += '<span class="deal-price">₹' + p.price.toLocaleString('en-IN') + '</span>';
+        html += '<span class="deal-price-old">₹' + p.originalPrice.toLocaleString('en-IN') + '</span>';
+        html += '<span class="deal-savings">Save ₹' + savings.toLocaleString('en-IN') + '</span>';
+        html += '</div>';
+        html += '<button class="deal-add-btn add-to-cart" data-name="' + p.name + '" data-price="' + p.price + '">+</button>';
+        html += '</div></div></div>';
+      }
+      grid.innerHTML = html;
+    }
+
+    // Filter buttons
+    document.querySelectorAll('.deals-filter-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.deals-filter-btn').forEach(function(b){ b.classList.remove('active'); });
+        btn.classList.add('active');
+        currentFilter = btn.dataset.filter;
+        renderDeals();
+      });
+    });
+
+    // Search
+    document.getElementById('searchInput').addEventListener('input', function() {
+      renderDeals();
+    });
+
+    fetchDeals();
+  </script>
+</body>
+</html>
