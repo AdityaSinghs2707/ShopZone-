@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const orderItemSchema = new mongoose.Schema({
-  product: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: true },
+product: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: false },
   name:    { type: String, required: true },
   emoji:   { type: String, default: '📦' },
   price:   { type: Number, required: true },

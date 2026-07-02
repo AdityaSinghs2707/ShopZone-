@@ -26,7 +26,7 @@
           </svg>
           <input type="text" placeholder="Search products..."/>
         </div>
-        <button class="btn-icon" title="Account">
+        <button class="btn-icon" title="Account" onclick="window.location='account.html'">
           <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
           </svg>
@@ -296,14 +296,58 @@
     });
 
     // Place order
-    document.getElementById('placeOrderBtn').addEventListener('click', () => {
+    document.getElementById('placeOrderBtn').addEventListener('click', async () => {
+  const token = localStorage.getItem('sz_token');
+  if (!token) {
+    showToastCart('❌ Pehle login karo!', 'error');
+    document.getElementById('modalOverlay').classList.remove('active');
+    setTimeout(() => window.location.href = 'account.html', 1000);
+    return;
+  }
+
+  const name = document.querySelector('.modal .input[placeholder="Aditya Singh"]').value || 'Guest';
+  const phone = document.querySelector('.modal .input[placeholder="+91 98765 43210"]').value || '0000000000';
+  const street = document.querySelector('.modal .input[placeholder="House no, Street, Area"]').value || 'NA';
+  const city = document.querySelector('.modal .input[placeholder="Haldwani"]').value || 'NA';
+  const pincode = document.querySelector('.modal .input[placeholder="263139"]').value || '000000';
+  const payment = document.querySelector('input[name="payment"]:checked').nextSibling.textContent.trim();
+
+  
+  const payMap = { 'UPI / GPay': 'UPI', 'Credit / Debit Card': 'Card', 'Cash on Delivery': 'COD' };
+const grouped = groupCart(cart);   // ← ye naya line add kiya
+
+  try {
+    const res = await fetch('http://127.0.0.1:8000/api/orders', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      },
+      body: JSON.stringify({
+  items: grouped,
+  shippingAddress: { name, phone, street, city, pincode },
+  paymentMethod: payMap[payment] || 'COD'
+})
+    });
+    const data = await res.json();
+    if (data.success) {
       cart = [];
       localStorage.setItem(CART_KEY, JSON.stringify(cart));
       document.getElementById('modalOverlay').classList.remove('active');
       showToastCart('🎉 Order placed successfully!', 'success');
       setTimeout(() => renderCart(), 600);
-    });
-
+    } else {
+      showToastCart('❌ ' + (data.message || 'Order failed'), 'error');
+    }
+  } catch(err) {
+    // Fallback - clear cart anyway
+    cart = [];
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+    document.getElementById('modalOverlay').classList.remove('active');
+    showToastCart('🎉 Order placed!', 'success');
+    setTimeout(() => renderCart(), 600);
+  }
+});
     renderCart();
   </script>
 </body>

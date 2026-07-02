@@ -68,7 +68,7 @@
           </svg>
           <input type="text" placeholder="Search products..." id="searchInput"/>
         </div>
-        <button class="btn-icon" title="Account">
+        <button class="btn-icon" title="Account" onclick="window.location='account.html'">
           <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
           </svg>
@@ -148,7 +148,7 @@
 
   <script src="../js/main.js"></script>
   <script>
-    const API_URL = 'http://127.0.0.1:8000/api';
+    var PRODUCTS_API_URL = 'http://127.0.0.1:8000/api';
     let allProducts = [];
     let currentPage = 1;
     let currentCategory = 'all';
@@ -165,7 +165,7 @@
     async function fetchProducts() {
       showSkeletons();
       try {
-        var res = await fetch(API_URL + '/products?limit=100');
+        var res = await fetch(PRODUCTS_API_URL + '/products?limit=100');
         var data = await res.json();
         allProducts = data.products || [];
         updateCounts();
@@ -223,7 +223,7 @@
         var disc = p.originalPrice > p.price ? Math.round((1 - p.price/p.originalPrice)*100) : 0;
         var badge = p.badge ? '<span class="card-badge ' + (p.badge === 'Sale' ? 'badge-danger' : 'badge-accent') + '">' + p.badge + '</span>' : '';
         var oldPrice = p.originalPrice > p.price ? '<span class="card-price-old">&#8377;' + p.originalPrice.toLocaleString('en-IN') + '</span>' : '';
-        html += '<div class="product-card" onclick="window.location=\'product-detail.html\'">';
+        html += '<div class="product-card" onclick="window.location=\'product-detail.html?name=' + p.name + '\'">';
         html += '<div class="card-img-wrap"><span class="card-emoji">' + (p.emoji || '📦') + '</span>' + badge + '<button class="card-wishlist">♡</button></div>';
         html += '<div class="card-body">';
         html += '<p class="card-category">' + p.category.toUpperCase() + '</p>';

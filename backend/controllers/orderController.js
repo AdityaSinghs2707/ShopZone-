@@ -6,25 +6,23 @@ const PROMO_CODES = { SHOP10: 500, SAVE200: 200 };
 // ── @POST /api/orders ── (place order)
 const placeOrder = async (req, res) => {
   try {
-    const { shippingAddress, paymentMethod, promoCode } = req.body;
+    const { shippingAddress, paymentMethod, promoCode, items } = req.body;
 
-    const cart = await Cart.findOne({ user: req.user._id });
-    if (!cart || cart.items.length === 0)
+    if (!items || items.length === 0)
       return res.status(400).json({ success: false, message: 'Cart is empty' });
 
-    const itemsPrice    = cart.items.reduce((s, i) => s + i.price * i.qty, 0);
+    const itemsPrice    = items.reduce((s, i) => s + Number(i.price) * i.qty, 0);
     const deliveryPrice = itemsPrice > 499 ? 0 : 99;
     const discount      = promoCode ? (PROMO_CODES[promoCode.toUpperCase()] || 0) : 0;
     const totalPrice    = itemsPrice + deliveryPrice - discount;
 
     const order = await Order.create({
       user: req.user._id,
-      orderItems: cart.items.map((i) => ({
-        product: i.product,
-        name:    i.name,
-        emoji:   i.emoji,
-        price:   i.price,
-        qty:     i.qty,
+      orderItems: items.map((i) => ({
+        name:  i.name,
+        emoji: i.emoji || '📦',
+        price: i.price,
+        qty:   i.qty,
       })),
       shippingAddress,
       paymentMethod: paymentMethod || 'COD',
@@ -33,10 +31,6 @@ const placeOrder = async (req, res) => {
       discount,
       totalPrice,
     });
-
-    // Clear cart after order placed
-    cart.items = [];
-    await cart.save();
 
     res.status(201).json({ success: true, message: '🎉 Order placed successfully!', order });
   } catch (err) {
@@ -61,7 +55,6 @@ const getOrderById = async (req, res) => {
     if (!order)
       return res.status(404).json({ success: false, message: 'Order not found' });
 
-    // Users can only see their own orders
     if (order.user._id.toString() !== req.user._id.toString() && req.user.role !== 'admin')
       return res.status(403).json({ success: false, message: 'Access denied' });
 

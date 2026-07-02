@@ -452,7 +452,7 @@ p { color: var(--text-secondary); line-height: 1.7; }
   font-family: var(--font-display);
   font-size: 22px;
   font-weight: 800;
-  color: #fff;
+  color: var(--text-primary);  
   flex-shrink: 0;
   text-decoration: none;
   letter-spacing: -0.02em;
@@ -648,7 +648,7 @@ p { color: var(--text-secondary); line-height: 1.7; }
   font-family: var(--font-display);
   font-size: 22px;
   font-weight: 700;
-  color: #fff;
+  color:var(--text-primary);
 }
 .stat-label { font-size: 11px; color: var(--text-muted); }
 .stat-divider { width: 1px; height: 36px; background: var(--border); }
